@@ -417,7 +417,7 @@ export default function Navbar() {
                     ✕
                   </button>
                 </form>
-                <h3 className="font-bold text-lg text-center">
+                <h3 className="font-bold text-lg text-center border-2 p-2 rounded-3xl bg-red-500">
                   Your Listed Grains.
                 </h3>
 

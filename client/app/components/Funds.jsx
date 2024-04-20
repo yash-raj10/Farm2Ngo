@@ -78,6 +78,12 @@ const Crops = () => {
                       }}
                       zoom={6}
                       mapContainerStyle={{ width: "100%", height: "100%" }}
+                      options={{
+                        zoomControl: false,
+                        streetViewControl: false,
+                        mapTypeControl: false,
+                        fullscreenControl: false,
+                      }}
                     >
                       <Marker
                         position={{
@@ -101,7 +107,7 @@ const Crops = () => {
                           />
                         )} */}
                     </GoogleMap>
-                    <div className="absolute top-[1px] px-1  text-base font-bold  rounded-none border  bg-white ">
+                    <div className="absolute top-[1px] px-1  text-base font-bold  rounded-xl border  bg-teal-400 ">
                       Location of NGO.
                     </div>
                   </div>
@@ -113,10 +119,10 @@ const Crops = () => {
                       src={fund.imagesrc}
                       className=" object-cover h-full w-full group-hover:scale-110 transition"
                     />
-                    <div className="absolute -bottom-[2px] -right-[0px] px-2 pb-[2px] mb-[2px] text-sm  rounded-full border  bg-white ">
+                    <div className="absolute -bottom-[2px] -right-[0px] px-2 pb-[2px] mb-[2px] text-sm  rounded-full border bg-white ">
                       {fund.add1}
                     </div>
-                    <div className="absolute top-[1px] px-1  text-base font-bold  rounded-none border  bg-white ">
+                    <div className="absolute top-[1px] px-1  text-base font-bold  rounded-xl border   bg-teal-400 ">
                       Picture of Grain to be transported.
                     </div>
                   </div>
@@ -149,7 +155,7 @@ const Crops = () => {
                 </div>
 
                 <div className="">
-                  <button className="border-2 px-2 rounded-md py-1 bg-slate-500 mb-2">
+                  <button className="border-2 px-2 rounded-md py-1 bg-teal-600 text-white font-semibold mb-2">
                     Click to view full Details{" "}
                   </button>
                 </div>

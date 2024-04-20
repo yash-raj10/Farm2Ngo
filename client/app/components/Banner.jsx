@@ -5,20 +5,26 @@ export const Banner = () => {
   return (
     <div
       id="about"
-      className=" bg-cyan-200 flex flex-col lg:flex-row md:flex-row justify-around pb-4 md:pb-0  lg:pb-0 px-8"
+      className=" bg-blue-500 flex flex-col lg:flex-row md:flex-row justify-around pb-4 md:pb-0  lg:pb-0 pr-8"
     >
-      <div className=" md:p-16  lg:p-16 m-4 md:m-0 lg:m-0  ">
-        <p className="md:text-3xl lg:text-3xl text-2xl font-semibold py-3 md:py-3 lg:py-7 text-center ">
-          !!!Book Mart!!!
+      <div className=" md:p-12  lg:p-12 m-4 md:m-0 lg:m-0  ">
+        <p className="md:text-4xl lg:text-4xl font-semibold py-3 md:py-3 lg:py-7 text-left text-4xl ">
+          Farm2Ngo.
         </p>
-        <p className="md:text-xl font-medium text-base rounded-3xl p-3 bg-white text-black">
-          Welcome to BookMart - your one-stop destination for great books!
-          Explore our handpicked collection spanning various genres, from
-          classics to bestsellers. Enjoy easy browsing and fast shipping. Join
-          our community and dive into the world of literature today!
+        <p className="md:text-lg font-medium text-base rounded-2xl py-2 px-3 bg-white text-gray-700">
+          Bridge the gap between farmers with excessive crops and NGOs aiming to
+          alleviate hunger and food insecurity. Farm2Ngo facilitates the
+          efficient distribution of surplus crops from areas with low demand to
+          regions where there is a greater need.
         </p>
       </div>
-      <img src={farm2nfo} height={80} alt="book" />
+      <div className="flex justify-center items-center p-5 lg:h-80 lg:w-96 ">
+        {" "}
+        <img
+          src="https://raw.githubusercontent.com/yash-raj10/Farm2Ngo/main/client/public/farm2nfo.png"
+          alt="logo"
+        />
+      </div>
     </div>
   );
 };

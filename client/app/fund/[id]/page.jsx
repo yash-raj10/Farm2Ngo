@@ -13,6 +13,8 @@ import {
   useJsApiLoader,
 } from "@react-google-maps/api";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
+import { useSolPay } from "@/app/solPay";
+
 require("@solana/wallet-adapter-react-ui/styles.css");
 
 export default function Page({ params }) {
@@ -21,6 +23,24 @@ export default function Page({ params }) {
   const [directionsResponse, setDirectionsResponse] = useState(null);
   const [distance, setDistance] = useState("");
   const [duration, setDuration] = useState("");
+
+  const { register, reset, setValue, watch, handleSubmit } = useForm({
+    defaultValues: {
+      imageSrc: "",
+    },
+  });
+
+  const {
+    connected,
+    publiCKey,
+    doTransaction,
+    amount,
+    setAmount,
+    receiver,
+    setReceiver,
+    transactionPurpose,
+    setTransactionPurpose,
+  } = useSolPay();
 
   useEffect(() => {
     const forFunds = async () => {
@@ -80,6 +100,16 @@ export default function Page({ params }) {
     setDistance(results.routes[0].legs[0].distance.text);
     setDuration(results.routes[0].legs[0].duration.text);
   }
+
+  const onPay = async (data) => {
+    setAmount(parseInt(data.sols));
+    setReceiver(data.id);
+    setTransactionPurpose(data.note);
+
+    await doTransaction({ amount, receiver, transactionPurpose });
+
+    reset();
+  };
 
   return (
     <>
@@ -180,6 +210,81 @@ export default function Page({ params }) {
                   (*Note the money will be transferred to NGO Acc.)
                 </span>
               </div>
+
+              <div className="p-2 flex justify-center items-center">
+                <button
+                  onClick={() =>
+                    document.getElementById("my_modal_7").showModal()
+                  }
+                  className="border-2 px-4 py-2 rounded-xl bg-green-500 text-white"
+                >
+                  Donate
+                </button>
+              </div>
+
+              <>
+                <div>
+                  <dialog id="my_modal_7" className="modal">
+                    <div className="modal-box ">
+                      <form method="dialog">
+                        <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+                          ✕
+                        </button>
+                      </form>
+                      <h3 className="font-bold text-lg text-center">
+                        Please Fill it!
+                      </h3>
+
+                      <form action="" onSubmit={handleSubmit(onPay)}>
+                        <div className="w-full  relative pt-1">
+                          <input
+                            {...register("sols")}
+                            // defaultValue={add1}
+                            placeholder=" "
+                            className={` peer  w-full p-5 pb-4 font-light bg-white border-2 rounded-md outline-none transition  disabled:opacity-70 disabled:cursor-not-allowed pl-4 border-neutral-300 focus:border-black`}
+                          />
+                          <label
+                            className={`absolute text-base duration-150 transform -translate-y-3 top-5 z-10 origin-[0] left-4 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 text-zinc-400 `}
+                          >
+                            Number of Sols
+                          </label>
+                        </div>
+                        <div className="w-full  relative pt-1">
+                          <input
+                            {...register("id")}
+                            defaultValue={fundData.donationid}
+                            placeholder=" "
+                            className={` peer  w-full p-5 pb-4 font-light bg-white border-2 rounded-md outline-none transition  disabled:opacity-70 disabled:cursor-not-allowed pl-4 border-neutral-300 focus:border-black`}
+                          />
+                          <label
+                            className={`absolute text-base duration-150 transform -translate-y-3 top-5 z-10 origin-[0] left-4 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 text-zinc-400 `}
+                          >
+                            Transaction Id (of NGO)
+                          </label>
+                        </div>
+                        <div className="w-full  relative pt-1">
+                          <input
+                            {...register("note")}
+                            // defaultValue={add1}
+                            placeholder=" "
+                            className={` peer  w-full p-5 pb-4 font-light bg-white border-2 rounded-md outline-none transition  disabled:opacity-70 disabled:cursor-not-allowed pl-4 border-neutral-300 focus:border-black`}
+                          />
+                          <label
+                            className={`absolute text-base duration-150 transform -translate-y-3 top-5 z-10 origin-[0] left-4 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4 text-zinc-400 `}
+                          >
+                            Note.
+                          </label>
+                        </div>
+                        <div className="flex justify-center items-center mt-2">
+                          <button className="px-3 py-1 border-2  rounded-xl bg-blue-600 text-white">
+                            Pay
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </dialog>
+                </div>
+              </>
             </div>
           </div>
         </div>

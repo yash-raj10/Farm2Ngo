@@ -4,6 +4,7 @@ import "./globals.css";
 import { UserProvider } from "@auth0/nextjs-auth0/client";
 import Navbar from "@/app/components/navbar";
 import dynamic from "next/dynamic";
+import { Banner } from "@/app/components/Banner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,6 +30,7 @@ export default function RootLayout({
         <html lang="en">
           <body className={inter.className}>
             <Navbar />
+            <Banner />
             <WalletConnectionProvider>{children}</WalletConnectionProvider>
           </body>
         </html>

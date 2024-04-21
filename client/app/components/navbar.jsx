@@ -10,6 +10,7 @@ import { CldUploadWidget } from "next-cloudinary";
 import React, { useCallback } from "react";
 import { TbPhotoPlus } from "react-icons/tb";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Navbar() {
   const { user, isLoading } = useUser();
@@ -367,6 +368,9 @@ export default function Navbar() {
                     </button>
                   </li>
                 )}
+                <li>
+                  <Link href="/learn">Learn</Link>
+                </li>
 
                 <li>
                   <a>Logout</a>

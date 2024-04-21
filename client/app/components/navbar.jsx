@@ -151,6 +151,20 @@ export default function Navbar() {
 
   let imageSrc = watch("imageSrc");
 
+  function liveSearch() {
+    let cards = document.querySelectorAll(".cards");
+    let search_query = document.getElementById("searchbox").value;
+    for (var i = 0; i < cards.length; i++) {
+      if (
+        cards[i].innerText.toLowerCase().includes(search_query.toLowerCase())
+      ) {
+        cards[i].classList.remove("is-hidden");
+      } else {
+        cards[i].classList.add("is-hidden");
+      }
+    }
+  }
+
   function Fill({
     emaill,
     nameLabel,
@@ -317,6 +331,8 @@ export default function Navbar() {
               <div className="form-control">
                 <input
                   type="text"
+                  id="searchbox"
+                  onInput={() => liveSearch()}
                   placeholder="Search"
                   className="input input-bordered w-24 md:w-auto"
                 />
